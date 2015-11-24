@@ -1,8 +1,8 @@
 package jsprit.core.algorithm.ruin;
 
-import jsprit.core.problem.job.Job;
-
 import java.util.Iterator;
+
+import jsprit.core.problem.job.Job;
 
 /**
 * Created by schroeder on 07/01/15.

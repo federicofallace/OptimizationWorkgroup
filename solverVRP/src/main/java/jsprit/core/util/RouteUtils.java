@@ -16,6 +16,8 @@
  ******************************************************************************/
 package jsprit.core.util;
 
+import java.util.Collection;
+
 import jsprit.core.algorithm.state.UpdateActivityTimes;
 import jsprit.core.problem.cost.TransportTime;
 import jsprit.core.problem.driver.DriverImpl;
@@ -24,8 +26,6 @@ import jsprit.core.problem.job.Service;
 import jsprit.core.problem.solution.route.RouteActivityVisitor;
 import jsprit.core.problem.solution.route.VehicleRoute;
 import jsprit.core.problem.solution.route.activity.TourActivity;
-
-import java.util.Collection;
 
 @Deprecated
 public class RouteUtils {

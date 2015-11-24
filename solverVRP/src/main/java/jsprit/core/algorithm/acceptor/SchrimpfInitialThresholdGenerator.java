@@ -16,6 +16,13 @@
  ******************************************************************************/
 package jsprit.core.algorithm.acceptor;
 
+import java.net.URL;
+import java.util.Collection;
+
+import org.apache.commons.math.stat.descriptive.moment.StandardDeviation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import jsprit.core.algorithm.VehicleRoutingAlgorithm;
 import jsprit.core.algorithm.io.AlgorithmConfig;
 import jsprit.core.algorithm.io.AlgorithmConfigXmlReader;
@@ -26,12 +33,6 @@ import jsprit.core.problem.VehicleRoutingProblem;
 import jsprit.core.problem.solution.VehicleRoutingProblemSolution;
 import jsprit.core.util.Resource;
 import jsprit.core.util.Solutions;
-import org.apache.commons.math.stat.descriptive.moment.StandardDeviation;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.net.URL;
-import java.util.Collection;
 
 public class SchrimpfInitialThresholdGenerator implements AlgorithmStartsListener {
 	

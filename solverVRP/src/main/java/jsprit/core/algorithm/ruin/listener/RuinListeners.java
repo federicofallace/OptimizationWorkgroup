@@ -18,12 +18,12 @@
 
 package jsprit.core.algorithm.ruin.listener;
 
-import jsprit.core.problem.job.Job;
-import jsprit.core.problem.solution.route.VehicleRoute;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+
+import jsprit.core.problem.job.Job;
+import jsprit.core.problem.solution.route.VehicleRoute;
 
 
 public class RuinListeners {

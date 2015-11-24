@@ -16,6 +16,8 @@
  ******************************************************************************/
 package jsprit.core.algorithm.state;
 
+import java.util.Collection;
+
 import jsprit.core.algorithm.recreate.listener.InsertionStartsListener;
 import jsprit.core.algorithm.recreate.listener.JobInsertedListener;
 import jsprit.core.problem.Capacity;
@@ -26,8 +28,6 @@ import jsprit.core.problem.job.Service;
 import jsprit.core.problem.solution.route.VehicleRoute;
 import jsprit.core.problem.solution.route.activity.ActivityVisitor;
 import jsprit.core.problem.solution.route.activity.TourActivity;
-
-import java.util.Collection;
 
 
 /**

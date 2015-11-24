@@ -16,9 +16,18 @@
  ******************************************************************************/
 package jsprit.core.algorithm.recreate;
 
+import java.util.Iterator;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import jsprit.core.problem.JobActivityFactory;
-import jsprit.core.problem.constraint.*;
+import jsprit.core.problem.constraint.ConstraintManager;
+import jsprit.core.problem.constraint.HardActivityConstraint;
 import jsprit.core.problem.constraint.HardActivityConstraint.ConstraintsStatus;
+import jsprit.core.problem.constraint.HardRouteConstraint;
+import jsprit.core.problem.constraint.SoftActivityConstraint;
+import jsprit.core.problem.constraint.SoftRouteConstraint;
 import jsprit.core.problem.cost.VehicleRoutingTransportCosts;
 import jsprit.core.problem.driver.Driver;
 import jsprit.core.problem.job.Job;
@@ -30,10 +39,6 @@ import jsprit.core.problem.solution.route.activity.Start;
 import jsprit.core.problem.solution.route.activity.TourActivity;
 import jsprit.core.problem.vehicle.Vehicle;
 import jsprit.core.util.CalculationUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.Iterator;
 
 /**
  * Calculator that calculates the best insertion position for a {@link Service}.

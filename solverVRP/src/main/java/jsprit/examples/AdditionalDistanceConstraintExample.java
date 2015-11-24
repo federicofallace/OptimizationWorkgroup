@@ -19,6 +19,8 @@
 package jsprit.examples;
 
 
+import java.util.Collection;
+
 import jsprit.analysis.toolbox.Plotter;
 import jsprit.core.algorithm.VehicleRoutingAlgorithm;
 import jsprit.core.algorithm.VehicleRoutingAlgorithmBuilder;
@@ -39,8 +41,6 @@ import jsprit.core.util.Coordinate;
 import jsprit.core.util.EuclideanDistanceCalculator;
 import jsprit.core.util.Solutions;
 import jsprit.core.util.VehicleRoutingTransportCostsMatrix;
-
-import java.util.Collection;
 
 //import jsprit.core.problem.solution.route.state.StateFactory; //v1.3.1
 

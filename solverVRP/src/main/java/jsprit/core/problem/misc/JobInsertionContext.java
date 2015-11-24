@@ -16,14 +16,14 @@
  ******************************************************************************/
 package jsprit.core.problem.misc;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jsprit.core.problem.driver.Driver;
 import jsprit.core.problem.job.Job;
 import jsprit.core.problem.solution.route.VehicleRoute;
 import jsprit.core.problem.solution.route.activity.TourActivity;
 import jsprit.core.problem.vehicle.Vehicle;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Provides context information about a particular job insertion.

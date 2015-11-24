@@ -16,11 +16,11 @@
  ******************************************************************************/
 package jsprit.core.problem.solution.route;
 
-import jsprit.core.problem.solution.route.activity.ActivityVisitor;
-import jsprit.core.problem.solution.route.activity.TourActivity;
-
 import java.util.ArrayList;
 import java.util.Collection;
+
+import jsprit.core.problem.solution.route.activity.ActivityVisitor;
+import jsprit.core.problem.solution.route.activity.TourActivity;
 
 
 public class RouteActivityVisitor implements RouteVisitor{

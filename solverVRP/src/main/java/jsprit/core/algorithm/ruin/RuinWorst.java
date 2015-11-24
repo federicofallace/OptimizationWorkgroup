@@ -16,6 +16,16 @@
  ******************************************************************************/
 package jsprit.core.algorithm.ruin;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import jsprit.core.problem.VehicleRoutingProblem;
 import jsprit.core.problem.driver.DriverImpl;
 import jsprit.core.problem.job.Job;
@@ -23,10 +33,6 @@ import jsprit.core.problem.solution.route.VehicleRoute;
 import jsprit.core.problem.solution.route.activity.TourActivity;
 import jsprit.core.problem.vehicle.Vehicle;
 import jsprit.core.util.NoiseMaker;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.*;
 
 
 /**

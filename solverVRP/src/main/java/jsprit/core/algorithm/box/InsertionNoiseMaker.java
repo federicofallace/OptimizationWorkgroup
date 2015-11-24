@@ -1,5 +1,10 @@
 package jsprit.core.algorithm.box;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Random;
+
 import jsprit.core.algorithm.listener.IterationStartsListener;
 import jsprit.core.problem.Location;
 import jsprit.core.problem.VehicleRoutingProblem;
@@ -11,11 +16,6 @@ import jsprit.core.problem.misc.JobInsertionContext;
 import jsprit.core.problem.solution.VehicleRoutingProblemSolution;
 import jsprit.core.problem.solution.route.activity.TourActivity;
 import jsprit.core.util.RandomNumberGeneration;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
 
 /**
 * Created by schroeder on 16/01/15.

@@ -17,6 +17,9 @@
 
 package jsprit.core.algorithm.recreate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jsprit.core.algorithm.listener.VehicleRoutingAlgorithmListeners;
 import jsprit.core.algorithm.recreate.listener.InsertionListener;
 import jsprit.core.algorithm.state.StateManager;
@@ -25,9 +28,6 @@ import jsprit.core.problem.constraint.ConstraintManager;
 import jsprit.core.problem.job.Job;
 import jsprit.core.problem.solution.route.VehicleRoute;
 import jsprit.core.problem.vehicle.VehicleFleetManager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by schroeder on 11.12.14.

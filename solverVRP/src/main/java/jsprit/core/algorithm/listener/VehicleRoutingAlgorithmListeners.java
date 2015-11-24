@@ -16,12 +16,17 @@
  ******************************************************************************/
 package jsprit.core.algorithm.listener;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.TreeSet;
+
 import jsprit.core.algorithm.SearchStrategy;
 import jsprit.core.algorithm.VehicleRoutingAlgorithm;
 import jsprit.core.problem.VehicleRoutingProblem;
 import jsprit.core.problem.solution.VehicleRoutingProblemSolution;
-
-import java.util.*;
 
 
 

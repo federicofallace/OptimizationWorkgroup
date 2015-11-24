@@ -16,6 +16,13 @@
  ******************************************************************************/
 package jsprit.core.algorithm.io;
 
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+
+import org.apache.commons.configuration.HierarchicalConfiguration;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import jsprit.core.algorithm.listener.VehicleRoutingAlgorithmListeners.PrioritizedVRAListener;
 import jsprit.core.algorithm.recreate.InsertionBuilder;
 import jsprit.core.algorithm.recreate.InsertionStrategy;
@@ -23,12 +30,6 @@ import jsprit.core.algorithm.state.StateManager;
 import jsprit.core.problem.VehicleRoutingProblem;
 import jsprit.core.problem.constraint.ConstraintManager;
 import jsprit.core.problem.vehicle.VehicleFleetManager;
-import org.apache.commons.configuration.HierarchicalConfiguration;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.List;
-import java.util.concurrent.ExecutorService;
 
 
 class InsertionFactory {

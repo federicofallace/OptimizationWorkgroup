@@ -16,6 +16,8 @@
  ******************************************************************************/
 package jsprit.examples;
 
+import java.util.Collection;
+
 import jsprit.analysis.toolbox.GraphStreamViewer;
 import jsprit.core.algorithm.VehicleRoutingAlgorithm;
 import jsprit.core.algorithm.io.VehicleRoutingAlgorithms;
@@ -29,8 +31,6 @@ import jsprit.core.problem.vehicle.VehicleType;
 import jsprit.core.problem.vehicle.VehicleTypeImpl;
 import jsprit.core.reporting.SolutionPrinter;
 import jsprit.core.util.Solutions;
-
-import java.util.Collection;
 
 /**
  * customers (id,x,y,demand)

@@ -18,6 +18,9 @@
 
 package jsprit.core.algorithm.recreate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jsprit.core.algorithm.state.InternalStates;
 import jsprit.core.problem.cost.VehicleRoutingActivityCosts;
 import jsprit.core.problem.cost.VehicleRoutingTransportCosts;
@@ -27,9 +30,6 @@ import jsprit.core.problem.solution.route.activity.End;
 import jsprit.core.problem.solution.route.activity.Start;
 import jsprit.core.problem.solution.route.activity.TourActivity;
 import jsprit.core.problem.solution.route.state.RouteAndActivityStateGetter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 class RouteLevelActivityInsertionCostsEstimator implements ActivityInsertionCostsCalculator{

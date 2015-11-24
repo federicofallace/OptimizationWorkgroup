@@ -1,11 +1,11 @@
 package jsprit.core.util;
 
-import jsprit.core.problem.job.Job;
-import jsprit.core.problem.solution.route.VehicleRoute;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
+
+import jsprit.core.problem.job.Job;
+import jsprit.core.problem.solution.route.VehicleRoute;
 
 /**
  * Created by schroeder on 14/01/15.

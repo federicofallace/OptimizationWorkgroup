@@ -17,17 +17,6 @@
 package jsprit.instance.reader;
 
 
-import jsprit.core.problem.Location;
-import jsprit.core.problem.VehicleRoutingProblem;
-import jsprit.core.problem.VehicleRoutingProblem.Builder;
-import jsprit.core.problem.job.Shipment;
-import jsprit.core.problem.solution.route.activity.TimeWindow;
-import jsprit.core.problem.vehicle.VehicleImpl;
-import jsprit.core.problem.vehicle.VehicleTypeImpl;
-import jsprit.core.util.Coordinate;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -36,6 +25,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import jsprit.core.problem.Location;
+import jsprit.core.problem.VehicleRoutingProblem;
+import jsprit.core.problem.VehicleRoutingProblem.Builder;
+import jsprit.core.problem.job.Shipment;
+import jsprit.core.problem.solution.route.activity.TimeWindow;
+import jsprit.core.problem.vehicle.VehicleImpl;
+import jsprit.core.problem.vehicle.VehicleTypeImpl;
+import jsprit.core.util.Coordinate;
 
 
 /**

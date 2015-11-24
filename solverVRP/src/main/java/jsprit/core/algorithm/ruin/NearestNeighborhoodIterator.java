@@ -1,10 +1,11 @@
 package jsprit.core.algorithm.ruin;
 
-import jsprit.core.problem.job.Job;
+import java.util.Iterator;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Iterator;
+import jsprit.core.problem.job.Job;
 
 /**
 * Created by schroeder on 07/01/15.

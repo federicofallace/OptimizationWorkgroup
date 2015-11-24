@@ -16,6 +16,10 @@
  ******************************************************************************/
 package jsprit.core.algorithm.module;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 import jsprit.core.algorithm.SearchStrategyModule;
 import jsprit.core.algorithm.listener.SearchStrategyModuleListener;
 import jsprit.core.algorithm.recreate.InsertionStrategy;
@@ -24,10 +28,6 @@ import jsprit.core.algorithm.ruin.RuinStrategy;
 import jsprit.core.algorithm.ruin.listener.RuinListener;
 import jsprit.core.problem.job.Job;
 import jsprit.core.problem.solution.VehicleRoutingProblemSolution;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 
 public class RuinAndRecreateModule implements SearchStrategyModule{

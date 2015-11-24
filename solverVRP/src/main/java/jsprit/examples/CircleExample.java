@@ -17,6 +17,10 @@
 
 package jsprit.examples;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+
 import jsprit.analysis.toolbox.AlgorithmEventsRecorder;
 import jsprit.analysis.toolbox.AlgorithmEventsViewer;
 import jsprit.analysis.toolbox.GraphStreamViewer;
@@ -30,10 +34,6 @@ import jsprit.core.problem.solution.VehicleRoutingProblemSolution;
 import jsprit.core.problem.vehicle.VehicleImpl;
 import jsprit.core.util.Coordinate;
 import jsprit.core.util.Solutions;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by schroeder on 27.11.14.

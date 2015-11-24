@@ -18,6 +18,8 @@
 package jsprit.examples;
 
 
+import java.util.Collection;
+
 import jsprit.analysis.toolbox.GraphStreamViewer;
 import jsprit.core.algorithm.VehicleRoutingAlgorithm;
 import jsprit.core.algorithm.VehicleRoutingAlgorithmBuilder;
@@ -38,8 +40,6 @@ import jsprit.core.problem.solution.route.activity.TourActivity;
 import jsprit.core.problem.vehicle.VehicleImpl;
 import jsprit.core.reporting.SolutionPrinter;
 import jsprit.core.util.Solutions;
-
-import java.util.Collection;
 
 /**
  * Illustrates dependencies between jobs.

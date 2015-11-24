@@ -16,6 +16,8 @@
  ******************************************************************************/
 package jsprit.examples;
 
+import java.util.Collection;
+
 import jsprit.analysis.toolbox.AlgorithmEventsRecorder;
 import jsprit.analysis.toolbox.AlgorithmEventsViewer;
 import jsprit.analysis.toolbox.GraphStreamViewer;
@@ -29,8 +31,6 @@ import jsprit.core.problem.solution.VehicleRoutingProblemSolution;
 import jsprit.core.reporting.SolutionPrinter;
 import jsprit.instance.reader.SolomonReader;
 import jsprit.util.Examples;
-
-import java.util.Collection;
 
 
 public class SolomonWithRegretInsertionExample {

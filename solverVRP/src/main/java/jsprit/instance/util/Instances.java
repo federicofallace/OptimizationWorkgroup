@@ -16,17 +16,21 @@
  ******************************************************************************/
 package jsprit.instance.util;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 import jsprit.core.problem.VehicleRoutingProblem;
 import jsprit.core.util.BenchmarkInstance;
 import jsprit.instance.reader.ChristofidesReader;
 import jsprit.instance.reader.CordeauReader;
 import jsprit.instance.reader.SolomonReader;
-
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 
 
 public class Instances {

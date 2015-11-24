@@ -16,17 +16,34 @@
  ******************************************************************************/
 package jsprit.core.problem.solution.route;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import jsprit.core.problem.AbstractActivity;
 import jsprit.core.problem.JobActivityFactory;
 import jsprit.core.problem.driver.Driver;
 import jsprit.core.problem.driver.DriverImpl;
-import jsprit.core.problem.job.*;
-import jsprit.core.problem.solution.route.activity.*;
+import jsprit.core.problem.job.Delivery;
+import jsprit.core.problem.job.Job;
+import jsprit.core.problem.job.Pickup;
+import jsprit.core.problem.job.Service;
+import jsprit.core.problem.job.Shipment;
+import jsprit.core.problem.solution.route.activity.DefaultShipmentActivityFactory;
+import jsprit.core.problem.solution.route.activity.DefaultTourActivityFactory;
+import jsprit.core.problem.solution.route.activity.End;
+import jsprit.core.problem.solution.route.activity.Start;
+import jsprit.core.problem.solution.route.activity.TourActivities;
+import jsprit.core.problem.solution.route.activity.TourActivity;
+import jsprit.core.problem.solution.route.activity.TourActivityFactory;
+import jsprit.core.problem.solution.route.activity.TourShipmentActivityFactory;
 import jsprit.core.problem.vehicle.Vehicle;
 import jsprit.core.problem.vehicle.VehicleImpl;
 import jsprit.core.problem.vehicle.VehicleImpl.NoVehicle;
-
-import java.util.*;
 
 /**
  * Contains the tour, i.e. a number of activities, a vehicle servicing the tour and a driver.

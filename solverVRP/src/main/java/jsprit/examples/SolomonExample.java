@@ -16,6 +16,8 @@
  ******************************************************************************/
 package jsprit.examples;
 
+import java.util.Collection;
+
 import jsprit.analysis.toolbox.GraphStreamViewer;
 import jsprit.analysis.toolbox.GraphStreamViewer.Label;
 import jsprit.analysis.toolbox.Plotter;
@@ -27,8 +29,6 @@ import jsprit.core.problem.solution.VehicleRoutingProblemSolution;
 import jsprit.core.reporting.SolutionPrinter;
 import jsprit.instance.reader.SolomonReader;
 import jsprit.util.Examples;
-
-import java.util.Collection;
 
 
 public class SolomonExample {

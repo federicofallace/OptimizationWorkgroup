@@ -16,9 +16,10 @@
  ******************************************************************************/
 package jsprit.core.algorithm.termination;
 
-import jsprit.core.algorithm.SearchStrategy.DiscoveredSolution;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import jsprit.core.algorithm.SearchStrategy.DiscoveredSolution;
 
 /**
  * Terminates algorithm prematurely based on iterations without any improvement (i.e. new solution acceptance).

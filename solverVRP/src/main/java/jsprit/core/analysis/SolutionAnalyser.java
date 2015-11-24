@@ -17,8 +17,20 @@
 
 package jsprit.core.analysis;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import jsprit.core.algorithm.VariablePlusFixedSolutionCostCalculatorFactory;
-import jsprit.core.algorithm.state.*;
+import jsprit.core.algorithm.state.InternalStates;
+import jsprit.core.algorithm.state.StateId;
+import jsprit.core.algorithm.state.StateManager;
+import jsprit.core.algorithm.state.StateUpdater;
+import jsprit.core.algorithm.state.UpdateActivityTimes;
+import jsprit.core.algorithm.state.UpdateVariableCosts;
 import jsprit.core.problem.Capacity;
 import jsprit.core.problem.Location;
 import jsprit.core.problem.VehicleRoutingProblem;
@@ -27,14 +39,18 @@ import jsprit.core.problem.cost.VehicleRoutingTransportCosts;
 import jsprit.core.problem.solution.SolutionCostCalculator;
 import jsprit.core.problem.solution.VehicleRoutingProblemSolution;
 import jsprit.core.problem.solution.route.VehicleRoute;
-import jsprit.core.problem.solution.route.activity.*;
+import jsprit.core.problem.solution.route.activity.ActivityVisitor;
+import jsprit.core.problem.solution.route.activity.DeliverService;
+import jsprit.core.problem.solution.route.activity.DeliverShipment;
+import jsprit.core.problem.solution.route.activity.DeliveryActivity;
+import jsprit.core.problem.solution.route.activity.End;
+import jsprit.core.problem.solution.route.activity.PickupActivity;
+import jsprit.core.problem.solution.route.activity.PickupService;
+import jsprit.core.problem.solution.route.activity.PickupShipment;
+import jsprit.core.problem.solution.route.activity.ServiceActivity;
+import jsprit.core.problem.solution.route.activity.Start;
+import jsprit.core.problem.solution.route.activity.TourActivity;
 import jsprit.core.util.ActivityTimeTracker;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Calculates a set of statistics for a solution.

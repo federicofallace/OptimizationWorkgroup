@@ -16,9 +16,9 @@
  ******************************************************************************/
 package jsprit.core.util;
 
-import jsprit.core.problem.solution.VehicleRoutingProblemSolution;
-
 import java.util.Collection;
+
+import jsprit.core.problem.solution.VehicleRoutingProblemSolution;
 
 
 public class Solutions {

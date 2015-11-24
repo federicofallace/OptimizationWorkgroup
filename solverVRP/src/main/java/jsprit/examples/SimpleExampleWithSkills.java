@@ -16,6 +16,9 @@
  ******************************************************************************/
 package jsprit.examples;
 
+import java.io.File;
+import java.util.Collection;
+
 import jsprit.analysis.toolbox.GraphStreamViewer;
 import jsprit.analysis.toolbox.GraphStreamViewer.Label;
 import jsprit.core.algorithm.VehicleRoutingAlgorithm;
@@ -33,9 +36,6 @@ import jsprit.core.problem.vehicle.VehicleType;
 import jsprit.core.problem.vehicle.VehicleTypeImpl;
 import jsprit.core.reporting.SolutionPrinter;
 import jsprit.core.util.Solutions;
-
-import java.io.File;
-import java.util.Collection;
 
 
 public class SimpleExampleWithSkills {

@@ -16,11 +16,11 @@
  ******************************************************************************/
 package jsprit.core.algorithm.ruin;
 
+import java.util.Collection;
+
 import jsprit.core.algorithm.ruin.listener.RuinListener;
 import jsprit.core.problem.job.Job;
 import jsprit.core.problem.solution.route.VehicleRoute;
-
-import java.util.Collection;
 
 
 

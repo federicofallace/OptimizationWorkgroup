@@ -16,11 +16,11 @@
  ******************************************************************************/
 package jsprit.core.algorithm.recreate;
 
-import jsprit.core.problem.driver.Driver;
-import jsprit.core.problem.vehicle.Vehicle;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import jsprit.core.problem.driver.Driver;
+import jsprit.core.problem.vehicle.Vehicle;
 
 /**
  * Data object that collects insertion information. It collects insertionCosts, insertionIndeces, vehicle and driver to be employed

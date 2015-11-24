@@ -16,13 +16,13 @@
  ******************************************************************************/
 package jsprit.core.algorithm.recreate.listener;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import jsprit.core.algorithm.recreate.InsertionData;
 import jsprit.core.problem.job.Job;
 import jsprit.core.problem.solution.route.VehicleRoute;
 import jsprit.core.problem.vehicle.Vehicle;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 
 public class InsertionListeners {

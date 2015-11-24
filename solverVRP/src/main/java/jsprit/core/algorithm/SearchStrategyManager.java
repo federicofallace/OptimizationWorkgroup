@@ -16,13 +16,19 @@
  ******************************************************************************/
 package jsprit.core.algorithm;
 
-import jsprit.core.algorithm.listener.SearchStrategyListener;
-import jsprit.core.algorithm.listener.SearchStrategyModuleListener;
-import jsprit.core.util.RandomNumberGeneration;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import jsprit.core.algorithm.listener.SearchStrategyListener;
+import jsprit.core.algorithm.listener.SearchStrategyModuleListener;
+import jsprit.core.util.RandomNumberGeneration;
 
 
 public class SearchStrategyManager {

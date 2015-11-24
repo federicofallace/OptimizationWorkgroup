@@ -16,6 +16,9 @@
  ******************************************************************************/
 package jsprit.examples;
 
+import java.io.File;
+import java.util.Collection;
+
 import jsprit.analysis.toolbox.GraphStreamViewer;
 import jsprit.analysis.toolbox.GraphStreamViewer.Label;
 import jsprit.analysis.toolbox.Plotter;
@@ -26,9 +29,6 @@ import jsprit.core.problem.VehicleRoutingProblem;
 import jsprit.core.problem.io.VrpXMLReader;
 import jsprit.core.problem.solution.VehicleRoutingProblemSolution;
 import jsprit.core.reporting.SolutionPrinter;
-
-import java.io.File;
-import java.util.Collection;
 
 
 public class SolomonExampleWithSpecifiedVehicleEndLocationsWithoutTWs {

@@ -1,8 +1,8 @@
 package jsprit.core.problem;
 
-import jsprit.core.problem.job.Job;
-
 import java.util.List;
+
+import jsprit.core.problem.job.Job;
 
 /**
  * JobActivityFactory that creates the activities to the specified job.

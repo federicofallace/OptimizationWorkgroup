@@ -17,9 +17,40 @@
 package jsprit.core.algorithm.io;
 
 
-import jsprit.core.algorithm.*;
-import jsprit.core.algorithm.acceptor.*;
-import jsprit.core.algorithm.io.VehicleRoutingAlgorithms.TypedMap.*;
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import org.apache.commons.configuration.HierarchicalConfiguration;
+import org.apache.commons.configuration.XMLConfiguration;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import jsprit.core.algorithm.PrettyAlgorithmBuilder;
+import jsprit.core.algorithm.SearchStrategy;
+import jsprit.core.algorithm.SearchStrategyModule;
+import jsprit.core.algorithm.VariablePlusFixedSolutionCostCalculatorFactory;
+import jsprit.core.algorithm.VehicleRoutingAlgorithm;
+import jsprit.core.algorithm.acceptor.AcceptNewRemoveFirst;
+import jsprit.core.algorithm.acceptor.ExperimentalSchrimpfAcceptance;
+import jsprit.core.algorithm.acceptor.GreedyAcceptance;
+import jsprit.core.algorithm.acceptor.GreedyAcceptance_minVehFirst;
+import jsprit.core.algorithm.acceptor.SchrimpfAcceptance;
+import jsprit.core.algorithm.acceptor.SchrimpfInitialThresholdGenerator;
+import jsprit.core.algorithm.acceptor.SolutionAcceptor;
+import jsprit.core.algorithm.io.VehicleRoutingAlgorithms.TypedMap.AcceptorKey;
+import jsprit.core.algorithm.io.VehicleRoutingAlgorithms.TypedMap.InsertionStrategyKey;
+import jsprit.core.algorithm.io.VehicleRoutingAlgorithms.TypedMap.RuinStrategyKey;
+import jsprit.core.algorithm.io.VehicleRoutingAlgorithms.TypedMap.SelectorKey;
+import jsprit.core.algorithm.io.VehicleRoutingAlgorithms.TypedMap.StrategyModuleKey;
 import jsprit.core.algorithm.listener.AlgorithmEndsListener;
 import jsprit.core.algorithm.listener.VehicleRoutingAlgorithmListeners.PrioritizedVRAListener;
 import jsprit.core.algorithm.listener.VehicleRoutingAlgorithmListeners.Priority;
@@ -34,7 +65,12 @@ import jsprit.core.algorithm.ruin.distance.JobDistance;
 import jsprit.core.algorithm.selector.SelectBest;
 import jsprit.core.algorithm.selector.SelectRandomly;
 import jsprit.core.algorithm.selector.SolutionSelector;
-import jsprit.core.algorithm.state.*;
+import jsprit.core.algorithm.state.StateManager;
+import jsprit.core.algorithm.state.StateUpdater;
+import jsprit.core.algorithm.state.UpdateActivityTimes;
+import jsprit.core.algorithm.state.UpdateEndLocationIfRouteIsOpen;
+import jsprit.core.algorithm.state.UpdateVariableCosts;
+import jsprit.core.algorithm.state.UpdateVehicleDependentPracticalTimeWindows;
 import jsprit.core.algorithm.termination.IterationWithoutImprovementTermination;
 import jsprit.core.algorithm.termination.PrematureAlgorithmTermination;
 import jsprit.core.algorithm.termination.TimeTermination;
@@ -48,18 +84,12 @@ import jsprit.core.problem.solution.route.VehicleRoute;
 import jsprit.core.problem.solution.route.activity.End;
 import jsprit.core.problem.solution.route.activity.ReverseActivityVisitor;
 import jsprit.core.problem.solution.route.activity.TourActivity;
-import jsprit.core.problem.vehicle.*;
+import jsprit.core.problem.vehicle.FiniteFleetManagerFactory;
+import jsprit.core.problem.vehicle.InfiniteFleetManagerFactory;
+import jsprit.core.problem.vehicle.Vehicle;
+import jsprit.core.problem.vehicle.VehicleFleetManager;
+import jsprit.core.problem.vehicle.VehicleTypeKey;
 import jsprit.core.util.ActivityTimeTracker;
-import org.apache.commons.configuration.HierarchicalConfiguration;
-import org.apache.commons.configuration.XMLConfiguration;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.lang.Thread.UncaughtExceptionHandler;
-import java.net.URL;
-import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class VehicleRoutingAlgorithms {
 	
@@ -650,14 +680,14 @@ public class VehicleRoutingAlgorithms {
         }
         if(basedOn.equals("iterations")){
             log.debug("set prematureBreak based on iterations");
-            String iter = config.getString("iterations");
+            String iter = config.getString("pBreak_iteration_group.iterations");
             if(iter == null) throw new IllegalStateException("iterations is missing");
             int iterations = Integer.valueOf(iter);
             return new IterationWithoutImprovementTermination(iterations);
         }
         if(basedOn.equals("time")){
             log.debug("set prematureBreak based on time");
-            String timeString = config.getString("time");
+            String timeString = config.getString("pBreak_time_group.time");
             if(timeString == null) throw new IllegalStateException("time is missing");
             long time = Long.parseLong(timeString);
             TimeTermination timeBreaker = new TimeTermination(time);
@@ -666,8 +696,8 @@ public class VehicleRoutingAlgorithms {
         }
         if(basedOn.equals("variationCoefficient")){
             log.debug("set prematureBreak based on variation coefficient");
-            String thresholdString = config.getString("threshold");
-            String iterationsString = config.getString("iterations");
+            String thresholdString = config.getString("pBreak_variationCoefficient_group.threshold");
+            String iterationsString = config.getString("pBreak_variationCoefficient_group.iterations");
             if(thresholdString == null) throw new IllegalStateException("threshold is missing");
             if(iterationsString == null) throw new IllegalStateException("iterations is missing");
             double threshold = Double.valueOf(thresholdString);
@@ -687,14 +717,14 @@ public class VehicleRoutingAlgorithms {
 		}
 		if(basedOn.equals("iterations")){
 			log.debug("set prematureBreak based on iterations");
-			String iter = config.getString("prematureBreak.iterations");
+			String iter = config.getString("prematureBreak.pBreak_iteration_group.iterations");
 			if(iter == null) throw new IllegalStateException("prematureBreak.iterations is missing");
 			int iterations = Integer.valueOf(iter);
 			return new IterationWithoutImprovementTermination(iterations);
 		}
 		if(basedOn.equals("time")){
 			log.debug("set prematureBreak based on time");
-			String timeString = config.getString("prematureBreak.time");
+			String timeString = config.getString("prematureBreak.pBreak_time_group.time");
 			if(timeString == null) throw new IllegalStateException("prematureBreak.time is missing");
 			long time = Long.parseLong(timeString);
 			TimeTermination timeBreaker = new TimeTermination(time);
@@ -703,8 +733,8 @@ public class VehicleRoutingAlgorithms {
 		}
 		if(basedOn.equals("variationCoefficient")){
 			log.debug("set prematureBreak based on variation coefficient");
-			String thresholdString = config.getString("prematureBreak.threshold");
-			String iterationsString = config.getString("prematureBreak.iterations");
+			String thresholdString = config.getString("prematureBreak.pBreak_variationCoefficient_group.threshold");
+			String iterationsString = config.getString("prematureBreak.pBreak_variationCoefficient_group.iterations");
 			if(thresholdString == null) throw new IllegalStateException("prematureBreak.threshold is missing");
 			if(iterationsString == null) throw new IllegalStateException("prematureBreak.iterations is missing");
 			double threshold = Double.valueOf(thresholdString);
@@ -841,11 +871,11 @@ public class VehicleRoutingAlgorithms {
 		if(definedModule != null) return definedModule; 
 		
 		if(moduleName.equals("ruin_and_recreate")){
-			String ruin_name = moduleConfig.getString("ruin[@name]");
+			String ruin_name = moduleConfig.getString("ruin_and_recreate_group.ruin[@name]");
 			if(ruin_name == null) throw new IllegalStateException("module.ruin[@name] is missing.");
-			String ruin_id = moduleConfig.getString("ruin[@id]");
+			String ruin_id = moduleConfig.getString("ruin_and_recreate_group.ruin[@id]");
 			if(ruin_id == null) ruin_id = "noId";
-			String shareToRuinString = moduleConfig.getString("ruin.share");
+			String shareToRuinString = moduleConfig.getString("ruin_and_recreate_group.ruin.share");
 			if(shareToRuinString == null) throw new IllegalStateException("module.ruin.share is missing.");
 			double shareToRuin = Double.valueOf(shareToRuinString);
 			final RuinStrategy ruin;
@@ -859,15 +889,15 @@ public class VehicleRoutingAlgorithms {
 			}
 			else throw new IllegalStateException("ruin[@name] " + ruin_name + " is not known. Use either randomRuin or radialRuin.");
 			
-			String insertionName = moduleConfig.getString("insertion[@name]");
+			String insertionName = moduleConfig.getString("ruin_and_recreate_group.insertion[@name]");
 			if(insertionName == null) throw new IllegalStateException("module.insertion[@name] is missing. set it to \"regretInsertion\" or \"bestInsertion\"");
-			String insertionId = moduleConfig.getString("insertion[@id]");
+			String insertionId = moduleConfig.getString("ruin_and_recreate_group.insertion[@id]");
 			if(insertionId == null) insertionId = "noId";
 			ModKey insertionKey = makeKey(insertionName,insertionId);
 			InsertionStrategyKey insertionStrategyKey = new InsertionStrategyKey(insertionKey);
 			InsertionStrategy insertion = definedClasses.get(insertionStrategyKey);
 			if(insertion == null){
-				List<HierarchicalConfiguration> insertionConfigs = moduleConfig.configurationsAt("insertion");
+				List<HierarchicalConfiguration> insertionConfigs = moduleConfig.configurationsAt("ruin_and_recreate_group.insertion");
 				if(insertionConfigs.size() != 1) throw new IllegalStateException("this should be 1");
 				List<PrioritizedVRAListener> prioListeners = new ArrayList<PrioritizedVRAListener>();
 				insertion = createInsertionStrategy(insertionConfigs.get(0), vrp, vehicleFleetManager, routeStates, prioListeners, executorService, nuOfThreads, constraintManager, addDefaultCostCalculators);

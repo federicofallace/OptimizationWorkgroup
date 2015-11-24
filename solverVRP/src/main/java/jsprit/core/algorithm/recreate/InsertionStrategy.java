@@ -16,11 +16,11 @@
  ******************************************************************************/
 package jsprit.core.algorithm.recreate;
 
+import java.util.Collection;
+
 import jsprit.core.algorithm.recreate.listener.InsertionListener;
 import jsprit.core.problem.job.Job;
 import jsprit.core.problem.solution.route.VehicleRoute;
-
-import java.util.Collection;
 
 
 

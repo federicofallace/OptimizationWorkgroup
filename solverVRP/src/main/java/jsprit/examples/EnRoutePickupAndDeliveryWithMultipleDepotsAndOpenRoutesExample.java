@@ -16,6 +16,9 @@
  ******************************************************************************/
 package jsprit.examples;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 import jsprit.analysis.toolbox.GraphStreamViewer;
 import jsprit.analysis.toolbox.GraphStreamViewer.Label;
 import jsprit.analysis.toolbox.Plotter;
@@ -35,9 +38,6 @@ import jsprit.core.reporting.SolutionPrinter;
 import jsprit.core.util.Coordinate;
 import jsprit.core.util.Solutions;
 import jsprit.util.Examples;
-
-import java.util.Arrays;
-import java.util.Collection;
 
 
 public class EnRoutePickupAndDeliveryWithMultipleDepotsAndOpenRoutesExample {

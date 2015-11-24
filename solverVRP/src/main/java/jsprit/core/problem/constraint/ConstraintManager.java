@@ -16,17 +16,18 @@
  ******************************************************************************/
 package jsprit.core.problem.constraint;
 
-import jsprit.core.problem.VehicleRoutingProblem;
-import jsprit.core.problem.misc.JobInsertionContext;
-import jsprit.core.problem.solution.route.activity.TourActivity;
-import jsprit.core.problem.solution.route.state.RouteAndActivityStateGetter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import jsprit.core.problem.VehicleRoutingProblem;
+import jsprit.core.problem.misc.JobInsertionContext;
+import jsprit.core.problem.solution.route.activity.TourActivity;
+import jsprit.core.problem.solution.route.state.RouteAndActivityStateGetter;
 
 /**
  * Manager that manage hard- and soft constraints, both on route and activity level.

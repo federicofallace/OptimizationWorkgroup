@@ -17,7 +17,12 @@
 package jsprit.core.problem.constraint;
 
 import jsprit.core.problem.misc.JobInsertionContext;
-import jsprit.core.problem.solution.route.activity.*;
+import jsprit.core.problem.solution.route.activity.DeliverService;
+import jsprit.core.problem.solution.route.activity.DeliverShipment;
+import jsprit.core.problem.solution.route.activity.PickupService;
+import jsprit.core.problem.solution.route.activity.PickupShipment;
+import jsprit.core.problem.solution.route.activity.ServiceActivity;
+import jsprit.core.problem.solution.route.activity.TourActivity;
 
 public class ServiceDeliveriesFirstConstraint implements HardActivityConstraint {
 

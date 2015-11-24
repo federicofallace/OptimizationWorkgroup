@@ -18,9 +18,9 @@
 
 package jsprit.core.algorithm.acceptor;
 
-import jsprit.core.problem.solution.VehicleRoutingProblemSolution;
-
 import java.util.Collection;
+
+import jsprit.core.problem.solution.VehicleRoutingProblemSolution;
 
 
 /**

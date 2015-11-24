@@ -16,15 +16,15 @@
  ******************************************************************************/
 package jsprit.core.algorithm.recreate;
 
+import java.util.Iterator;
+import java.util.List;
+
 import jsprit.core.problem.cost.VehicleRoutingActivityCosts;
 import jsprit.core.problem.cost.VehicleRoutingTransportCosts;
 import jsprit.core.problem.driver.Driver;
 import jsprit.core.problem.solution.route.activity.End;
 import jsprit.core.problem.solution.route.activity.TourActivity;
 import jsprit.core.problem.vehicle.Vehicle;
-
-import java.util.Iterator;
-import java.util.List;
 
 
 

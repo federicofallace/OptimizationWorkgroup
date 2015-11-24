@@ -16,11 +16,11 @@
  ******************************************************************************/
 package jsprit.core.problem.solution;
 
-import jsprit.core.problem.job.Job;
-import jsprit.core.problem.solution.route.VehicleRoute;
-
 import java.util.ArrayList;
 import java.util.Collection;
+
+import jsprit.core.problem.job.Job;
+import jsprit.core.problem.solution.route.VehicleRoute;
 
 
 /**

@@ -17,6 +17,8 @@
 
 package jsprit.examples;
 
+import java.util.Collection;
+
 import jsprit.analysis.toolbox.GraphStreamViewer;
 import jsprit.core.algorithm.VehicleRoutingAlgorithm;
 import jsprit.core.algorithm.box.Jsprit;
@@ -37,8 +39,6 @@ import jsprit.core.problem.vehicle.VehicleTypeImpl;
 import jsprit.core.reporting.SolutionPrinter;
 import jsprit.core.util.Coordinate;
 import jsprit.core.util.Solutions;
-
-import java.util.Collection;
 
 //import jsprit.core.problem.constraint.HardActivityStateLevelConstraint; //v1.3.1
 

@@ -16,6 +16,8 @@
  ******************************************************************************/
 package jsprit.examples;
 
+import java.util.Collection;
+
 import jsprit.analysis.toolbox.Plotter;
 import jsprit.analysis.toolbox.Plotter.Label;
 import jsprit.core.algorithm.VehicleRoutingAlgorithm;
@@ -36,8 +38,6 @@ import jsprit.core.problem.vehicle.VehicleTypeImpl;
 import jsprit.core.reporting.SolutionPrinter;
 import jsprit.core.util.Solutions;
 import jsprit.util.Examples;
-
-import java.util.Collection;
 
 
 public class SimpleVRPWithBackhaulsExample {

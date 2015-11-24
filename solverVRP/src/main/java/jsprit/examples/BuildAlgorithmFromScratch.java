@@ -18,6 +18,11 @@
 package jsprit.examples;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import jsprit.analysis.toolbox.AlgorithmEventsRecorder;
 import jsprit.analysis.toolbox.AlgorithmEventsViewer;
 import jsprit.core.algorithm.PrettyAlgorithmBuilder;
@@ -26,7 +31,12 @@ import jsprit.core.algorithm.VehicleRoutingAlgorithm;
 import jsprit.core.algorithm.acceptor.GreedyAcceptance;
 import jsprit.core.algorithm.listener.IterationStartsListener;
 import jsprit.core.algorithm.module.RuinAndRecreateModule;
-import jsprit.core.algorithm.recreate.*;
+import jsprit.core.algorithm.recreate.AbstractInsertionStrategy;
+import jsprit.core.algorithm.recreate.InsertionBuilder;
+import jsprit.core.algorithm.recreate.InsertionData;
+import jsprit.core.algorithm.recreate.JobInsertionCostsCalculatorLight;
+import jsprit.core.algorithm.recreate.JobInsertionCostsCalculatorLightFactory;
+import jsprit.core.algorithm.recreate.RegretInsertion;
 import jsprit.core.algorithm.ruin.RadialRuinStrategyFactory;
 import jsprit.core.algorithm.ruin.RandomRuinStrategyFactory;
 import jsprit.core.algorithm.ruin.RuinStrategy;
@@ -47,11 +57,6 @@ import jsprit.core.reporting.SolutionPrinter;
 import jsprit.core.util.Solutions;
 import jsprit.instance.reader.CordeauReader;
 import jsprit.util.Examples;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 public class BuildAlgorithmFromScratch {
 

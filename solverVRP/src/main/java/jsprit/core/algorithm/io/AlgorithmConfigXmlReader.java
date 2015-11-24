@@ -16,7 +16,10 @@
  ******************************************************************************/
 package jsprit.core.algorithm.io;
 
-import jsprit.core.util.Resource;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,9 +27,7 @@ import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+import jsprit.core.util.Resource;
 
 
 public class AlgorithmConfigXmlReader {
@@ -56,7 +57,7 @@ public class AlgorithmConfigXmlReader {
 		algorithmConfig.getXMLConfiguration().setDelimiterParsingDisabled(true);
 		
 		if(schemaValidation){
-			final InputStream resource = Resource.getAsInputStream("algorithm_schema.xsd");
+			final InputStream resource = Resource.getAsInputStream("src/main/resources/NewXMLSchema.xsd");
 			if(resource != null) {
 				EntityResolver resolver = new EntityResolver() {
 

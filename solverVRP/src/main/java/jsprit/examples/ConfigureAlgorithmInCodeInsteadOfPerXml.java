@@ -16,6 +16,10 @@
  ******************************************************************************/
 package jsprit.examples;
 
+import java.util.Collection;
+
+import org.apache.commons.configuration.XMLConfiguration;
+
 import jsprit.analysis.toolbox.Plotter;
 import jsprit.core.algorithm.VehicleRoutingAlgorithm;
 import jsprit.core.algorithm.io.AlgorithmConfig;
@@ -32,9 +36,6 @@ import jsprit.core.problem.vehicle.VehicleTypeImpl;
 import jsprit.core.reporting.SolutionPrinter;
 import jsprit.core.util.Solutions;
 import jsprit.util.Examples;
-import org.apache.commons.configuration.XMLConfiguration;
-
-import java.util.Collection;
 
 
 public class ConfigureAlgorithmInCodeInsteadOfPerXml {

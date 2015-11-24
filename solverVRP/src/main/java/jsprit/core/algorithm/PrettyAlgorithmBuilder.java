@@ -17,12 +17,22 @@
 
 package jsprit.core.algorithm;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 import jsprit.core.algorithm.acceptor.SchrimpfAcceptance;
 import jsprit.core.algorithm.acceptor.SolutionAcceptor;
 import jsprit.core.algorithm.listener.AlgorithmStartsListener;
 import jsprit.core.algorithm.recreate.InsertionStrategy;
 import jsprit.core.algorithm.recreate.VehicleSwitched;
-import jsprit.core.algorithm.state.*;
+import jsprit.core.algorithm.state.StateManager;
+import jsprit.core.algorithm.state.UpdateActivityTimes;
+import jsprit.core.algorithm.state.UpdateEndLocationIfRouteIsOpen;
+import jsprit.core.algorithm.state.UpdateVariableCosts;
+import jsprit.core.algorithm.state.UpdateVehicleDependentPracticalTimeWindows;
 import jsprit.core.problem.VehicleRoutingProblem;
 import jsprit.core.problem.constraint.ConstraintManager;
 import jsprit.core.problem.solution.SolutionCostCalculator;
@@ -32,8 +42,6 @@ import jsprit.core.problem.vehicle.Vehicle;
 import jsprit.core.problem.vehicle.VehicleFleetManager;
 import jsprit.core.problem.vehicle.VehicleTypeKey;
 import jsprit.core.util.ActivityTimeTracker;
-
-import java.util.*;
 
 /**
 * Created by schroeder on 10.12.14.

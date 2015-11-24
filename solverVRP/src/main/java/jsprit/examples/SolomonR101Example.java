@@ -16,6 +16,8 @@
  ******************************************************************************/
 package jsprit.examples;
 
+import java.util.Collection;
+
 import jsprit.analysis.toolbox.AlgorithmSearchProgressChartListener;
 import jsprit.analysis.toolbox.GraphStreamViewer;
 import jsprit.core.algorithm.VehicleRoutingAlgorithm;
@@ -26,8 +28,6 @@ import jsprit.core.problem.io.VrpXMLReader;
 import jsprit.core.problem.solution.VehicleRoutingProblemSolution;
 import jsprit.core.reporting.SolutionPrinter;
 import jsprit.util.Examples;
-
-import java.util.Collection;
 
 
 public class SolomonR101Example {

@@ -16,11 +16,12 @@
  ******************************************************************************/
 package jsprit.core.problem.vehicle;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import jsprit.core.problem.AbstractVehicle;
 import jsprit.core.problem.Location;
 import jsprit.core.problem.Skills;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 
 

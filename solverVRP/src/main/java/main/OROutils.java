@@ -33,6 +33,17 @@ public class OROutils {
 		close(writer);
 	}
 	
+	public static void writeDescription(String description, String path){
+		// Write description of solution
+		BufferedWriter writer = getAppender(path);
+		try {
+			writer.write(description+"\n\n");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+		close(writer);
+	}
+	
 	public static void writeHTML(VehicleRoutingProblem vrp, VehicleRoutingProblemSolution sol, String path){
 		if(sol == null) {
 			System.out.println("Solution not defined!");

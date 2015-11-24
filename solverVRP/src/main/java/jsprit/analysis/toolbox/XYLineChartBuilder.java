@@ -18,6 +18,11 @@
  ******************************************************************************/
 package jsprit.analysis.toolbox;
 
+import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
@@ -25,11 +30,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 

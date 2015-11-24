@@ -19,7 +19,11 @@ package jsprit.core.problem.constraint;
 import jsprit.core.algorithm.state.InternalStates;
 import jsprit.core.problem.Capacity;
 import jsprit.core.problem.misc.JobInsertionContext;
-import jsprit.core.problem.solution.route.activity.*;
+import jsprit.core.problem.solution.route.activity.DeliverService;
+import jsprit.core.problem.solution.route.activity.PickupService;
+import jsprit.core.problem.solution.route.activity.ServiceActivity;
+import jsprit.core.problem.solution.route.activity.Start;
+import jsprit.core.problem.solution.route.activity.TourActivity;
 import jsprit.core.problem.solution.route.state.RouteAndActivityStateGetter;
 
 

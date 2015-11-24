@@ -17,15 +17,15 @@
 
 package jsprit.core.algorithm.state;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 import jsprit.core.problem.Location;
 import jsprit.core.problem.cost.VehicleRoutingTransportCosts;
 import jsprit.core.problem.solution.route.VehicleRoute;
 import jsprit.core.problem.solution.route.activity.ReverseActivityVisitor;
 import jsprit.core.problem.solution.route.activity.TourActivity;
 import jsprit.core.problem.vehicle.Vehicle;
-
-import java.util.Arrays;
-import java.util.Collection;
 
 public class UpdateVehicleDependentPracticalTimeWindows implements ReverseActivityVisitor, StateUpdater{
 
