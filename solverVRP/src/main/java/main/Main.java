@@ -76,7 +76,8 @@ public class Main {
 		
 		try {
 			//tryAllConfigurations(args);
-			tryOneConfiguration(args);
+			//tryOneConfiguration(args);
+			tryMoreStrategies(args);
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
 			System.err.println("Exception while marshalling xml file");
@@ -96,7 +97,7 @@ public class Main {
 		vra.addListener(tterm);
 	}
 	
-	private static void tryAllConfigurations(String[] args) throws JAXBException, SAXException 
+	public static void tryAllConfigurations(String[] args) throws JAXBException, SAXException 
 	{
 		ObjectFactory of = new ObjectFactory();
 		
@@ -285,13 +286,13 @@ public class Main {
 		}
 	}
 	
-	private static void tryOneConfiguration(String[] args) throws JAXBException, SAXException
+	public static void tryOneConfiguration(String[] args) throws JAXBException, SAXException
 	{
 		ObjectFactory of = new ObjectFactory();
 		
 		//create algorithm
 		Algorithm alg = of.createAlgorithm();
-		alg.setIterations(BigInteger.valueOf(1024));
+		alg.setIterations(BigInteger.valueOf(1024*20));
 		InsertionTypeEnum insTypeEnum = InsertionTypeEnum.BEST_INSERTION;
 		InsertionType insertion = of.createInsertionType();
 		insertion.setName(insTypeEnum);
@@ -318,7 +319,7 @@ public class Main {
 		searchStrategy2.setName("strategy_2");
 		searchStrategies.getSearchStrategy().add(searchStrategy2);
 		SearchStrategyType searchStrategy3 = of.createSearchStrategyType();
-		searchStrategy2.setName("strategy_3");
+		searchStrategy3.setName("strategy_3");
 		searchStrategies.getSearchStrategy().add(searchStrategy3);
 		
 		SelectorType st1 = of.createSelectorType();
@@ -382,15 +383,15 @@ public class Main {
 		//setting ruin module
 		RuinType ruin1 = of.createRuinType();
 		ruin1.setName(RuinTypeEnum.RANDOM_RUIN);
-		ruin1.setShare(1.0);
+		ruin1.setShare(0.5);
 		rrg1.setRuin(ruin1);
 		RuinType ruin2 = of.createRuinType();
 		ruin2.setName(RuinTypeEnum.RADIAL_RUIN);
-		ruin2.setShare(1.0);
+		ruin2.setShare(0.5);
 		rrg2.setRuin(ruin2);
 		RuinType ruin3 = of.createRuinType();
 		ruin3.setName(RuinTypeEnum.RANDOM_RUIN);
-		ruin3.setShare(1.0);
+		ruin3.setShare(0.5);
 		rrg3.setRuin(ruin3);
 		
 		//setting insertion module
@@ -419,8 +420,110 @@ public class Main {
 		getSolution(description,args);
 		
 	}
+	
+	public static void tryMoreStrategies(String[] args) throws JAXBException, SAXException
+	{
+		ObjectFactory of = new ObjectFactory();
+		
+		//create algorithm
+		Algorithm alg = of.createAlgorithm();
+		//alg.setIterations(BigInteger.valueOf(1024*20));
+		alg.setMaxIterations(BigInteger.valueOf(1024));
+		InsertionTypeEnum insTypeEnum = InsertionTypeEnum.BEST_INSERTION;
+		InsertionType insertion = of.createInsertionType();
+		insertion.setName(insTypeEnum);
+		ConsiderFixedCosts consFixed = of.createInsertionTypeConsiderFixedCosts();
+		consFixed.setValue("true");
+		consFixed.setWeight(1.0);
+		Construction construction = of.createAlgorithmConstruction();
+		construction.setInsertion(insertion);
+		insertion.setConsiderFixedCosts(consFixed);
+		alg.setConstruction(construction);
+		
+		// try all combinations for equals strategies
+		for (SelectorTypeEnum se : SelectorTypeEnum.values())
+		{		
+			for (AcceptorTypeEnum ae : AcceptorTypeEnum.values())
+			{
+				for (RuinTypeEnum re : RuinTypeEnum.values())
+				{
+					double share = 0.6;
+					for (InsertionTypeEnum ie : InsertionTypeEnum.values())
+					{
+						//build N equals strategy
+						// N = 10
+						configureNStrategies(10,alg,se,ae,re,ie,share);
+						
+						//create description of the algorithm 
+						String description = getDescription(alg);
+						
+						//parsing Java class into XML file: input/algorithmConfig.xml
+						JAXBContext context = JAXBContext.newInstance(Algorithm.class);
+						Marshaller marshaller = context.createMarshaller();
+						marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+						marshaller.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, "http://www.w3schools.com NewXMLSchema.xsd");
+						marshaller.marshal(alg, new File("input/algorithmConfig.xml"));
+						marshaller.marshal(alg, System.out); //print xml on the screen
+						
+						//try the created configuration
+						getSolution(description,args);
+					}
+				}
+			}
+		}
+	}
+	
+	/* Configure nStrat Strategies of the same type */
+	private static void configureNStrategies(int nStrat,Algorithm alg,
+				SelectorTypeEnum se, AcceptorTypeEnum ae, RuinTypeEnum re, InsertionTypeEnum ie, double share)
+	{
+		ObjectFactory of = new ObjectFactory();
+		Strategy strategy = of.createAlgorithmStrategy();
+		strategy.setMemory(BigInteger.valueOf(3)); //memory setting
+		alg.setStrategy(strategy);
+		SearchStrategies searchStrategies = of.createAlgorithmStrategySearchStrategies();
+		strategy.setSearchStrategies(searchStrategies);
+		
+		for (int i = 0; i < nStrat; i++)
+		{
+			SearchStrategyType searchStrategy = of.createSearchStrategyType();
+			searchStrategy.setName("strategy_"+(i+1));
+			searchStrategies.getSearchStrategy().add(searchStrategy);
+			for (SearchStrategyType sst : searchStrategies.getSearchStrategy())
+			{
+				SelectorType st = of.createSelectorType();
+				st.setName(se);
+				sst.setSelector(st);
+				double probability = 1.0/((double)nStrat);
+				
+				sst.setProbability(probability);
+				AcceptorType a1 = of.createAcceptorType();
+				a1.setName(ae);
+				sst.setAcceptor(a1);
+				a1.setAlpha(0.0);
+				a1.setWarmup(0);
+				
+				ModuleType module1 = of.createModuleType();
+				module1.setName(ModuleTypeEnum.RUIN_AND_RECREATE);
+				Modules modules1 = of.createSearchStrategyTypeModules();
+				modules1.getModule().add(module1);
+				sst.setModules(modules1);
+				RuinAndRecreateGroupType rrg1 = of.createRuinAndRecreateGroupType();
+				module1.setRuinAndRecreateGroup(rrg1);
+				
+				RuinType ruin1 = of.createRuinType();
+				ruin1.setName(re);
+				ruin1.setShare(share);
+				rrg1.setRuin(ruin1);
+				
+				InsertionType insertion1 = of.createInsertionType();
+				insertion1.setName(ie);
+				rrg1.setInsertion(insertion1);
+			}
+		}
+	}
 
-	private static String getDescription(Algorithm alg) {
+	public static String getDescription(Algorithm alg) {
 		String description = "**Algorithm Description**\n";
 		description += "Construction: " + alg.getConstruction().getInsertion().getName() + " ";
 		description += "Iterations: " + alg.getIterations() + " ";
