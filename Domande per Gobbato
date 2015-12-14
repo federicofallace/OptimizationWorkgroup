@@ -19,7 +19,10 @@ La percentuale di errore è fatta facendo una media sugli errori ottenuti coi va
 La penalty è per ogni veicolo a partire dal primo o dopo l’ n-esimo?
 Se sì quale è n? In quale metodo decido la penalty??
 
-Quale benchmark prendo come riferimento? Quello caricato sul portale o quello trovato su internet?
+Quale benchmark prendo come riferimento? Quello caricato sul portale o quello trovato su internet (solomon-benchmark/100-customers) ?
+
+Per quanto riguarda i tempi di esecuzione, dobbiamo prendere come valori di riferimento quelli del file "state of the art" sul portale
+o non abbiamo nessun riferimento?
 
 
 
