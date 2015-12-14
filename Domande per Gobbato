@@ -1,0 +1,30 @@
+cosa vuol dire che la object function cambia
+
+adding constraints is not enough
+
+in base a cosa può cambiare o.f? decidiamo noi i parametri da rispettare
+route length
+service time
+n of costumers
+
+Prima Parte:
+
+2% errore grande
+<1% possibilmente
+rispetto a cosa???? best known!
+
+Con jsprit ci sono gap dei 5% anche, come possiamo noi ottenere risultati migliori?
+La percentuale di errore è fatta facendo una media sugli errori ottenuti coi vari file o TUTTI i file devono avere errore sotto 1% ?
+
+La penalty è per ogni veicolo a partire dal primo o dopo l’ n-esimo?
+Se sì quale è n? In quale metodo decido la penalty??
+
+Quale benchmark prendo come riferimento? Quello caricato sul portale o quello trovato su internet?
+
+
+
+Seconda Parte:
+
+Considero la fixed fleet, ma è ancora time windows?
+Quale metodo precisamente devo modificare o aggiungere?
+In quale metodo decido la fleet size?
