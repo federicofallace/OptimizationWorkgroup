@@ -57,6 +57,7 @@ import jsprit.core.algorithm.listener.VehicleRoutingAlgorithmListeners.Priority;
 import jsprit.core.algorithm.module.RuinAndRecreateModule;
 import jsprit.core.algorithm.recreate.InsertionStrategy;
 import jsprit.core.algorithm.recreate.listener.InsertionListener;
+import jsprit.core.algorithm.ruin.AbstractRuinStrategy;
 import jsprit.core.algorithm.ruin.RadialRuinStrategyFactory;
 import jsprit.core.algorithm.ruin.RandomRuinStrategyFactory;
 import jsprit.core.algorithm.ruin.RuinStrategy;
@@ -90,6 +91,20 @@ import jsprit.core.problem.vehicle.Vehicle;
 import jsprit.core.problem.vehicle.VehicleFleetManager;
 import jsprit.core.problem.vehicle.VehicleTypeKey;
 import jsprit.core.util.ActivityTimeTracker;
+// Updated upstream
+
+
+import org.apache.commons.configuration.HierarchicalConfiguration;
+import org.apache.commons.configuration.XMLConfiguration;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.net.URL;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+//Stashed changes
 
 public class VehicleRoutingAlgorithms {
 	
@@ -578,7 +593,6 @@ public class VehicleRoutingAlgorithms {
             timeWindowUpdater.setVehiclesToUpdate(new UpdateVehicleDependentPracticalTimeWindows.VehiclesToUpdate() {
 				Map<VehicleTypeKey,Vehicle> uniqueTypes = new HashMap<VehicleTypeKey,Vehicle>();
 
-				@Override
 				public Collection<Vehicle> get(VehicleRoute vehicleRoute) {
 					if(uniqueTypes.isEmpty()){
 						for( Vehicle v : vrp.getVehicles()){
@@ -595,9 +609,9 @@ public class VehicleRoutingAlgorithms {
             stateManager.addStateUpdater(timeWindowUpdater);
             activityPolicy = ActivityTimeTracker.ActivityPolicy.AS_SOON_AS_TIME_WINDOW_OPENS;
         }
-        else{
+        else
             activityPolicy = ActivityTimeTracker.ActivityPolicy.AS_SOON_AS_ARRIVED;
-        }
+        
         stateManager.addStateUpdater(new UpdateActivityTimes(vrp.getTransportCosts(),activityPolicy));
         stateManager.addStateUpdater(new UpdateVariableCosts(vrp.getActivityCosts(), vrp.getTransportCosts(), stateManager, activityPolicy));
 
@@ -887,6 +901,10 @@ public class VehicleRoutingAlgorithms {
 				JobDistance jobDistance = new AvgServiceAndShipmentDistance(vrp.getTransportCosts());
 				ruin = getRadialRuin(vrp, routeStates, definedClasses, ruinKey, shareToRuin, jobDistance);
 			}
+			else if(ruin_name.equals("worstRuin")){
+				JobDistance jobDistance = new AvgServiceAndShipmentDistance(vrp.getTransportCosts());
+				ruin = getWorstRuin(vrp, routeStates, definedClasses, ruinKey, shareToRuin, jobDistance);
+			}
 			else throw new IllegalStateException("ruin[@name] " + ruin_name + " is not known. Use either randomRuin or radialRuin.");
 			
 			String insertionName = moduleConfig.getString("ruin_and_recreate_group.insertion[@name]");
@@ -925,7 +943,20 @@ public class VehicleRoutingAlgorithms {
 		}
 		return ruin;
 	}
+	
+	private static RuinStrategy getStrategyRuin(final VehicleRoutingProblem vrp, final StateManager routeStates, TypedMap definedClasses, ModKey modKey, double shareToRuin, JobDistance jobDistance) {
+		RuinStrategyKey stratKey = new RuinStrategyKey(modKey);
+		RuinStrategy ruin = definedClasses.get(stratKey);
+		if(ruin == null){
+			ruin = new RadialRuinStrategyFactory(shareToRuin, jobDistance).createStrategy(vrp);
+			definedClasses.put(stratKey, ruin);
+		}
+		return ruin;
+	}
+	
 
+	
+	
 	private static RuinStrategy getRandomRuin(final VehicleRoutingProblem vrp, final StateManager routeStates, TypedMap definedClasses, ModKey modKey, double shareToRuin) {
 		RuinStrategyKey stratKey = new RuinStrategyKey(modKey);
 		RuinStrategy ruin = definedClasses.get(stratKey);
@@ -935,6 +966,22 @@ public class VehicleRoutingAlgorithms {
 		}
 		return ruin;
 	}
+	
+
+	
+	private static RuinStrategy getWorstRuin(final VehicleRoutingProblem vrp, final StateManager routeStates, TypedMap definedClasses, ModKey modKey, double shareToRuin, JobDistance jobDistance) {
+		RuinStrategyKey stratKey = new RuinStrategyKey(modKey);
+		RuinStrategy ruin = definedClasses.get(stratKey);
+		if(ruin == null){
+			ruin = new RandomRuinStrategyFactory(shareToRuin).createStrategy(vrp);
+			definedClasses.put(stratKey, ruin);
+		}
+		return ruin;
+	}
+	
+	
+	
+	
 	
 	private static InsertionStrategy createInsertionStrategy(HierarchicalConfiguration moduleConfig, VehicleRoutingProblem vrp,VehicleFleetManager vehicleFleetManager, StateManager routeStates, List<PrioritizedVRAListener> algorithmListeners, ExecutorService executorService, int nuOfThreads, ConstraintManager constraintManager, boolean addDefaultCostCalculators) {
 		return InsertionFactory.createInsertion(vrp, moduleConfig, vehicleFleetManager, routeStates, algorithmListeners, executorService, nuOfThreads, constraintManager, addDefaultCostCalculators);

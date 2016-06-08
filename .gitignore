@@ -1,1 +1,13 @@
 /bin/
+
+solverVRP/input/algorithmConfig.xml
+
+solverVRP/input/algorithmConfig.xml
+
+solverVRP/output/solutions.csv
+
+solverVRP/src/main/java/jsprit/core/algorithm/io/VehicleRoutingAlgorithms.java
+
+solverVRP/src/main/java/main/Main.java
+
+solverVRP/src/main/java/main/OROoptions.java
